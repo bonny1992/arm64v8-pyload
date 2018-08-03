@@ -4,7 +4,7 @@ COPY . ./app
 
 WORKDIR /app
 
-RUN pip install -r requirements.txt
+RUN pip install pyload-ng[full]
 
 EXPOSE 8010
 EXPOSE 7447

@@ -1,5 +1,12 @@
 FROM arm64v8/python:2.7-alpine
 
+RUN apk add --update \
+    python3-dev \
+    g++ \
+    make \
+    gcc
+
+
 RUN apk add --update ca-certificates wget unzip && \
     update-ca-certificates && \
     wget https://github.com/pyload/pyload/archive/stable.zip && \

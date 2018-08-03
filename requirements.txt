@@ -1,1 +1,7 @@
-pyload-ng[full]
+thrift
+tesseract
+beaker
+pycrypto
+feedparser
+beautifulsoup
+pyopenssl

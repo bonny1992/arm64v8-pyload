@@ -1,15 +1,19 @@
-FROM arm64v8/python:3.7-alpine
+FROM arm64v8/python:2.7-alpine
 
-RUN apk add --update git mercurial && \
-    git clone https://github.com/pyload/pyload && \
-    cd pyload && \
-    python setup.py build && \
-    python setup.py install && \
-    cd .. && \
-    rm -rf pyload && \
-    apk del git mercurial
+RUN apk add --update ca-certificates wget unzip && \
+    update-ca-certificates && \
+    wget https://github.com/pyload/pyload/archive/stable.zip && \
+    unzip stable.zip && mv pyload-stable/ /usr/share/pyload && \
+    apk del unzip && \
+    apk add --update py-jinja2 py-curl 
+
+COPY . ./app
+
+WORKDIR /app
+
+RUN pip install -r requirements.txt
 
 EXPOSE 8010
 EXPOSE 7447
 
-CMD pyload start --profile bonny
+CMD python /usr/share/pyload/pyLoadCore.py
